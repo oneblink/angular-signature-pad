@@ -1,3 +1,3 @@
-# blinkmobile / angular-signature-pad
+# blinkmobile / angular-signature-pad [![npm](https://img.shields.io/npm/v/@blinkmobile/angular-signature.svg?maxAge=2592000)](https://www.npmjs.com/package/@blinkmobile/angular-signature) [![npm](https://img.shields.io/npm/v/@blinkmobile/angular-signature-pad.svg?maxAge=2592000)](https://www.npmjs.com/package/@blinkmobile/angular-signature-pad) [![AppVeyor Status](https://img.shields.io/appveyor/ci/blinkmobile/angular-signature-pad/master.svg)](https://ci.appveyor.com/project/blinkmobile/angular-signature-pad) [![Travis CI Status](https://travis-ci.org/blinkmobile/angular-signature-pad.svg?branch=master)](https://travis-ci.org/blinkmobile/angular-signature-pad)
 
 AngularJS 1.x component for smooth canvas based signature drawing

@@ -1,0 +1,38 @@
+{
+  "name": "@blinkmobile/angular-signature-pad",
+  "description": "AngularJS 1.x component for smooth canvas based signature drawing",
+  "version": "1.0.0-alpha.1",
+    "author": {
+    "email": "matt@blinkmobile.com.au",
+    "name": "Matt Carroll",
+    "url": "https://github.com/mymattcarroll"
+  },
+  "bugs": {
+    "url": "https://github.com/blinkmobile/angular-signature-pad/issues"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "directories": {
+    "example": "example"
+  },
+  "engines": {
+    "node": ">=6",
+    "npm": ">=3"
+  },
+  "homepage": "https://github.com/blinkmobile/angular-signature-pad#readme",
+  "keywords": [
+    "angular",
+    "browser",
+    "canvas",
+    "signature"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blinkmobile/angular-signature-pad.git"
+  }
