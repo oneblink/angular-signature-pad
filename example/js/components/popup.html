@@ -1,0 +1,21 @@
+<div class="popup"
+     data-ng-if="$ctrl.show">
+  <bm-signature-pad options="{ penColor: 'green', initValue: $ctrl.signature }"
+                    crop="true"
+                    scale-down="true"
+                    undo="$ctrl.undo = $fn"
+                    clear="$ctrl.clear = $fn"
+                    get-signature="$ctrl.getSignature = $fn"
+                    resize="$ctrl.resize = $fn"></bm-signature-pad>
+
+  <button class="option undo" ng-click="$ctrl.undo()">Undo</button>
+  <button class="option clear" ng-click="$ctrl.clear()">Clear</button>
+  <button class="option cancel" ng-click="$ctrl.show = false">Cancel</button>
+  <button class="option save" ng-click="$ctrl.show = false; $ctrl.signature = $ctrl.getSignature()">Save</button>
+</div>
+
+<h3>Popup</h3>
+<button ng-click="$ctrl.show = true">Signature</button>
+
+<img ng-show="$ctrl.signature"
+     ng-src="{{ $ctrl.signature }}"></image>
