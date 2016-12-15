@@ -2,7 +2,7 @@
   "name": "@blinkmobile/angular-signature-pad",
   "description": "AngularJS 1.x component for smooth canvas based signature drawing",
   "version": "1.0.0-alpha.1",
-    "author": {
+  "author": {
     "email": "matt@blinkmobile.com.au",
     "name": "Matt Carroll",
     "url": "https://github.com/mymattcarroll"
@@ -11,16 +11,41 @@
     "url": "https://github.com/blinkmobile/angular-signature-pad/issues"
   },
   "dependencies": {
+    "angular": "1.6.0",
+    "signature_pad": "github:mymattcarroll/signature_pad#2b5615ac3d20e7a5feda41cb41ecf766a0bae84b"
   },
   "devDependencies": {
+    "babel-plugin-transform-es2015-modules-umd": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
+    "eslint": "^3.12.1",
+    "eslint-config-angular": "^0.5.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-angular": "^1.5.0",
+    "eslint-plugin-node": "^3.0.5",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "fixpack": "^2.3.1",
+    "flow-bin": "^0.37.0",
+    "grunt": "^1.0.1",
+    "grunt-babel": "^6.0.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "http-server": "^0.9.0",
+    "remark-cli": "^2.1.0",
+    "remark-lint": "^5.2.0",
+    "remark-preset-lint-recommended": "^1.0.0"
   },
   "directories": {
-    "example": "example"
+    "example": "example",
+    "test": "test"
   },
   "engines": {
     "node": ">=6",
     "npm": ">=3"
   },
+  "files": [
+    "bm-signature-pad.js",
+    "bm-signature-pad.min.js"
+  ],
   "homepage": "https://github.com/blinkmobile/angular-signature-pad#readme",
   "keywords": [
     "angular",
@@ -29,10 +54,24 @@
     "signature"
   ],
   "license": "MIT",
+  "main": "bm-signature-pad.js",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/blinkmobile/angular-signature-pad.git"
+  },
+  "scripts": {
+    "build": "grunt",
+    "eslint": "eslint --fix --cache .",
+    "fixpack": "fixpack",
+    "flow_check": "flow check",
+    "posttest": "npm run eslint && npm run flow_check && npm run remark && npm run fixpack",
+    "prebuild": "npm run test",
+    "prestart": "npm run build",
+    "remark": "remark . --preset lint-recommended",
+    "start": "http-server",
+    "test": "echo 'WARNING: no tests'"
   }
+}
