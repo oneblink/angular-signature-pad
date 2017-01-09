@@ -55,7 +55,7 @@ _All attributes are optional with the exception of ngModel_
 
 Attribute       |Value       |Comments
 ----------------|------------|--------
-`ngModel`       |String      |Reference to bind value of signature pad to. When `ngModel` is set, `crop`, `imageType` and `imageEncoder` attribute values will be used.
+`ngModel`       |String      |Reference to bind value of signature pad to. When `ngModel` is set, `crop`, `imageType` and `imageEncoder` attribute values will be used. `ngModel` is set to as a [DataUrl](https://developer.mozilla.org/en-US/docs/Web/HTTP/BasURIs).<br>Will be set to `undefined` if the canvas is empty<br>If the value of the `crop` attribute is truthy, the signature will be cropped of white space before generating a DataUrl<br>Otherwise the DataUrl will contain the entire canvas
 `options`       |Object      |All [signature_pad options](https://github.com/szimek/signature_pad#options) are valid.
 `crop`          |Expression  |Return a truthy value if the signature should be cropped of white space when `ngModel` is set.
 `imageType`     |Expression  |Return an image type to use when `ngModel` is set. See [HTMLCanvasElement.toDataUrl() type parameter](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL#Parameters) for options and default
@@ -63,7 +63,6 @@ Attribute       |Value       |Comments
 `scale-down`    |Expression  |Return a truthy value if the signature should be scaled down when calling the function exposed via `resize`.
 `clear`         |Expression  |Exposes the `clear()` function provided by _signature_pad_  as `$fn`.
 `resize`        |Expression  |Exposes the `resize()` function provided by _signature_pad_  as `$fn`. However, the `width` and `height` will be set to width and height of the canvas' parent element and the `scaleDown` argument will be set to the value of the `scale-down` attribute.
-`get-signature` |Expression  |Exposes a function as `$fn` that takes the same arguments as [HTMLCanvasElement.toDataUrl()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL) and returns the signature as a [DataUrl](https://developer.mozilla.org/en-US/docs/Web/HTTP/BasURIs).<br>Will return `undefined` if the canvas is empty<br>If the value of the `crop` attribute is truthy, the signature will be cropped of white space before generating a DataUrl<br>Otherwise the DataUrl will contain the entire canvas
 
 ### Recommendations
 
