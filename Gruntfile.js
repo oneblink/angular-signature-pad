@@ -16,7 +16,7 @@ module.exports = function (grunt) {
       },
       prod: {
         files: {
-          'bm-signature-pad.js': ['src/bm-signature-pad.js']
+          'angular-signature-pad.js': ['src/angular-signature-pad.js']
         }
       }
     },
@@ -27,7 +27,7 @@ module.exports = function (grunt) {
           preserveComments: false
         },
         files: {
-          'bm-signature-pad.min.js': ['bm-signature-pad.js']
+          'angular-signature-pad.min.js': ['angular-signature-pad.js']
         }
       }
     },
@@ -48,7 +48,7 @@ module.exports = function (grunt) {
 `
         },
         files: {
-          'bm-signature-pad.js': ['bm-signature-pad.js']
+          'angular-signature-pad.js': ['angular-signature-pad.js']
         }
       },
       prod: {
@@ -60,7 +60,7 @@ module.exports = function (grunt) {
 `
         },
         files: {
-          'bm-signature-pad.min.js': ['bm-signature-pad.min.js']
+          'angular-signature-pad.min.js': ['angular-signature-pad.min.js']
         }
       }
     }

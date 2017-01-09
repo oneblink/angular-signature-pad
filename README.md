@@ -30,7 +30,7 @@ This means you must execute the exposed functions from your own buttons, events 
     <html ng-app="app">
     <head>
       <script src="node_modules/signature_pad/signature_pad.js"></script>
-      <script src="node_modules/bm-signature-pad/bm-signature-pad.js"></script>
+      <script src="node_modules/@blinkmobile/angular-signature-pad/angular-signature-pad.js"></script>
     </head>
     <body>
       ...
@@ -91,6 +91,8 @@ For more details on `$scope.$watch` best practices, see [Scope `$watch` Performa
 1.  Install [Node 6.x](https://nodejs.org/en/download/) or higher
 
 1.  Clone this repository
+
+    **Note**: The master branch can contain undocumented or backward compatibility breaking changes. Should checkout the latest release before running the demo.
 
 1.  Install dependencies
 

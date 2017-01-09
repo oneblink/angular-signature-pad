@@ -2,7 +2,7 @@
  * @blinkmobile/angular-signature-pad: v1.0.0-alpha.1
  * https://github.com/blinkmobile/angular-signature-pad#readme
  *
- * Copyright 2016 BlinkMobile
+ * Copyright 2017 BlinkMobile
  * Released under the MIT license
  *
  * A thin AngularJS 1.x wrapper around:
@@ -18,7 +18,7 @@
       exports: {}
     };
     factory(mod, global.angular, global.SignaturePad);
-    global.bmSignaturePad = mod.exports;
+    global.angularSignaturePad = mod.exports;
   }
 })(this, function (module, angular, SignaturePad) {
   'use strict';
@@ -33,24 +33,37 @@
     var vm = this;
     var element = $element[0];
     var canvas = element.children[0];
+    var signaturePad = void 0;
 
-    // Set canvas initial size to the fill parent element: <bm-signature-pad></bm-signature-pad>
+    // Set canvas initial size to fill parent element: <bm-signature-pad></bm-signature-pad>
     canvas.width = element.clientWidth;
     canvas.height = element.clientHeight;
 
+    vm.$onDestroy = function () {
+      if (signaturePad && angular.isFunction(signaturePad.off)) {
+        signaturePad.off();
+      }
+    };
     vm.$onInit = function () {
       var opts = vm.options || {};
+      var getSignature = function getSignature() {
+        if (!signaturePad || signaturePad.isEmpty()) {
+          return undefined;
+        }
 
-      // Allow onBegin and onEnd to be set from the options attribute
-      // but override if specified from specific attributes
-      if (vm.beforeDraw) {
-        opts.onBegin = vm.beforeDraw;
-      }
-      if (vm.afterDraw) {
-        opts.onEnd = vm.afterDraw;
-      }
+        var args = [vm.imageType ? vm.imageType() : undefined, vm.imageEncoder ? vm.imageEncoder() : undefined];
+        if (vm.crop && vm.crop()) {
+          var _signaturePad;
 
-      // Need to wrap the a few things in an $apply to ensure a digest cycle is started
+          return (_signaturePad = signaturePad).toDataURLCropped.apply(_signaturePad, args);
+        } else {
+          var _signaturePad2;
+
+          return (_signaturePad2 = signaturePad).toDataURL.apply(_signaturePad2, args);
+        }
+      };
+
+      // Need to wrap the a onBegin and onEnd in an $apply to ensure a digest cycle is started
       var wrapFunction = function wrapFunction(fn) {
         if (angular.isFunction(fn)) {
           return function () {
@@ -61,62 +74,63 @@
         }
       };
       opts.onBegin = wrapFunction(opts.onBegin);
-      opts.onEnd = wrapFunction(opts.onEnd);
-      opts.initValueCallback = wrapFunction(opts.initValueCallback);
+      var onEnd = opts.onEnd;
+      opts.onEnd = wrapFunction(function () {
+        vm.ngModel.$setViewValue(getSignature());
+        if (angular.isFunction(onEnd)) {
+          onEnd();
+        }
+      });
 
-      var signaturePad = new SignaturePad(canvas, opts);
+      signaturePad = new SignaturePad(canvas, opts);
 
       // Functions that are made available to the parent component
       if (vm.clear) {
         vm.clear({
           $fn: function $fn() {
-            return signaturePad.clear();
-          }
-        });
-      }
-      if (vm.undo) {
-        vm.undo({
-          $fn: function $fn() {
-            return signaturePad.undo();
+            signaturePad.clear();
+            vm.ngModel.$setViewValue(undefined);
           }
         });
       }
       if (vm.resize) {
         vm.resize({
           $fn: function $fn() {
-            return signaturePad.resize(element.clientWidth, element.clientHeight, vm.scaleDown && vm.scaleDown());
+            signaturePad.resize(element.clientWidth, element.clientHeight, vm.scaleDown && vm.scaleDown());
+            vm.ngModel.$setViewValue(getSignature());
           }
         });
       }
-      if (vm.getSignature) {
-        vm.getSignature({
-          $fn: function $fn() {
-            if (signaturePad.isEmpty()) {
-              return undefined;
-            } else if (vm.crop && vm.crop()) {
-              return signaturePad.toDataURLCropped.apply(signaturePad, arguments);
-            } else {
-              return signaturePad.toDataURL.apply(signaturePad, arguments);
-            }
-          }
-        });
-      }
+
+      // Specify how the model is deemed empty
+      vm.ngModel.$isEmpty = function () {
+        return signaturePad.isEmpty();
+      };
+      // Specify how UI should be updated
+      vm.ngModel.$render = function () {
+        if (vm.ngModel.$viewValue) {
+          signaturePad.fromDataURL(vm.ngModel.$viewValue);
+        } else {
+          signaturePad.clear();
+        }
+      };
     };
   }
 
   var bmSignaturePadComponent = {
     template: '<canvas class="signature-pad">Your browser does not support the HTML5 canvas tag.</canvas>',
     controller: BmSignaturePadController,
+    require: {
+      ngModel: 'ngModel'
+    },
     bindings: {
       options: '<?',
-      beforeDraw: '&?',
-      afterDraw: '&?',
       crop: '&?',
+      imageType: '&?',
+      imageEncoder: '&?',
       scaleDown: '&?',
-      undo: '&?',
       clear: '&?',
-      resize: '&?',
-      getSignature: '&?'
+      resize: '&?'
     }
   };
 
