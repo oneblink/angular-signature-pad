@@ -62,7 +62,6 @@ Attribute       |Value       |Comments
 `after-draw`    |Expression  |Allow an override of _signature_pad_ `onEnd` option.
 `crop`          |Expression  |Should return a truthy value if the signature should be cropped of white space when calling the function exposed via `get-signature`.
 `scale-down`    |Expression  |Should return a truthy value if the signature should be scaled down when calling the function exposed via `resize`.
-`undo`          |Expression  |Exposes the `undo()` function provided by _signature_pad_  as `$fn`.
 `clear`         |Expression  |Exposes the `clear()` function provided by _signature_pad_  as `$fn`.
 `resize`        |Expression  |Exposes the `resize()` function provided by _signature_pad_  as `$fn`. However, the `width` and `height` will be set to width and height of the canvas' parent element and the `scaleDown` argument will be set to the value of the `scale-down` attribute.
 `get-signature` |Expression  |Exposes a function as `$fn` that takes the same arguments as [HTMLCanvasElement.toDataUrl()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL) and returns the signature as a [DataUrl](https://developer.mozilla.org/en-US/docs/Web/HTTP/BasURIs).<br>Will return `undefined` if the canvas is empty<br>If the value of the `crop` attribute is truthy, the signature will be cropped of white space before generating a DataUrl<br>Otherwise the DataUrl will contain the entire canvas

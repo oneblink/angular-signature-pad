@@ -48,11 +48,6 @@ function BmSignaturePadController ($scope, $element, $window, $log) {
         $fn: () => signaturePad.clear()
       })
     }
-    if (vm.undo) {
-      vm.undo({
-        $fn: () => signaturePad.undo()
-      })
-    }
     if (vm.resize) {
       vm.resize({
         $fn: () => signaturePad.resize(element.clientWidth, element.clientHeight, vm.scaleDown && vm.scaleDown())
@@ -83,7 +78,6 @@ const bmSignaturePadComponent = {
     afterDraw: '&?',
     crop: '&?',
     scaleDown: '&?',
-    undo: '&?',
     clear: '&?',
     resize: '&?',
     getSignature: '&?'

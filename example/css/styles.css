@@ -73,7 +73,3 @@ signature-popup .popup button.cancel {
 signature-popup .popup button.clear {
   left: 10px;
 }
-
-signature-popup .popup button.undo {
-  left: 70px;
-}
