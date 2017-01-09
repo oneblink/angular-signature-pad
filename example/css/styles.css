@@ -41,8 +41,8 @@ signature-inline bm-signature-pad {
 
 /* Popup Example */
 signature-popup .popup {
-  background: lightgrey;
-  position: absolute;
+  background: rgba(211, 211, 211, 0.5);
+  position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
