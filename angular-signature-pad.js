@@ -85,14 +85,6 @@
       signaturePad = new SignaturePad(canvas, opts);
 
       // Functions that are made available to the parent component
-      if (vm.clear) {
-        vm.clear({
-          $fn: function $fn() {
-            signaturePad.clear();
-            vm.ngModel.$setViewValue(undefined);
-          }
-        });
-      }
       if (vm.resize) {
         vm.resize({
           $fn: function $fn() {
@@ -129,7 +121,6 @@
       imageType: '&?',
       imageEncoder: '&?',
       scaleDown: '&?',
-      clear: '&?',
       resize: '&?'
     }
   };
