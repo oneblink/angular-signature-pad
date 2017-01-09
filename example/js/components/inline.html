@@ -5,11 +5,10 @@
                     options="{ penColor: 'blue' }"
                     crop="$ctrl.crop"
                     scale-down="$ctrl.scaleDown"
-                    clear="$ctrl.clear = $fn;"
                     resize="$ctrl.resize = $fn"
                     ng-style="{ 'height': $ctrl.height + 'px' }"></bm-signature-pad>
 
-  <button ng-click="$ctrl.clear()"
+  <button ng-click="$ctrl.signature = undefined"
           ng-disabled="inline.$invalid">Clear</button>
 </form>
 <br>

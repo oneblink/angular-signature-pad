@@ -60,14 +60,6 @@ function BmSignaturePadController ($scope, $element, $window, $log) {
     signaturePad = new SignaturePad(canvas, opts)
 
     // Functions that are made available to the parent component
-    if (vm.clear) {
-      vm.clear({
-        $fn: () => {
-          signaturePad.clear()
-          vm.ngModel.$setViewValue(undefined)
-        }
-      })
-    }
     if (vm.resize) {
       vm.resize({
         $fn: () => {
@@ -102,7 +94,6 @@ const bmSignaturePadComponent = {
     imageType: '&?',
     imageEncoder: '&?',
     scaleDown: '&?',
-    clear: '&?',
     resize: '&?'
   }
 }

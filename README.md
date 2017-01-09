@@ -61,7 +61,6 @@ Attribute       |Value       |Comments
 `imageType`     |Expression  |Return an image type to use when `ngModel` is set. See [HTMLCanvasElement.toDataUrl() type parameter](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL#Parameters) for options and default
 `imageEncoder`  |Expression  |Return an image encoder to use when `ngModel` is set. See [HTMLCanvasElement.toDataUrl() encoderOptions parameter](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL#Parameters) for options and default
 `scale-down`    |Expression  |Return a truthy value if the signature should be scaled down when calling the function exposed via `resize`.
-`clear`         |Expression  |Exposes the `clear()` function provided by _signature_pad_  as `$fn`.
 `resize`        |Expression  |Exposes the `resize()` function provided by _signature_pad_  as `$fn`. However, the `width` and `height` will be set to width and height of the canvas' parent element and the `scaleDown` argument will be set to the value of the `scale-down` attribute.
 
 ### Recommendations

@@ -36,10 +36,11 @@ SignaturePopupController.$inject = ['$scope', '$element', '$window', '$log']
 function SignaturePopupController ($scope, $element, $window, $log) {
   var vm = this
   var windowEle = angular.element($window)
+  var popupEle = $element.find('div')
 
   // Watch for window resize changes to resize canvas
   function resize () {
-    if (angular.isFunction(vm.resize)) {
+    if (!popupEle.hasClass('ng-hide')) {
       vm.resize()
     }
   }
