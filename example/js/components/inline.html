@@ -1,14 +1,17 @@
 <h3>Inline</h3>
-<bm-signature-pad options="{ penColor: 'blue' }"
-                  crop="$ctrl.crop"
-                  scale-down="$ctrl.scaleDown"
-                  clear="$ctrl.clear = $fn;"
-                  get-signature="$ctrl.getSignature = $fn"
-                  resize="$ctrl.resize = $fn"
-                  ng-style="{ 'height': $ctrl.height + 'px' }"></bm-signature-pad>
+<form name="inline">
+  <bm-signature-pad ng-model="$ctrl.signature"
+                    required
+                    options="{ penColor: 'blue' }"
+                    crop="$ctrl.crop"
+                    scale-down="$ctrl.scaleDown"
+                    clear="$ctrl.clear = $fn;"
+                    resize="$ctrl.resize = $fn"
+                    ng-style="{ 'height': $ctrl.height + 'px' }"></bm-signature-pad>
 
-<button ng-click="$ctrl.clear()">Clear</button>
-<button ng-click="$ctrl.signature = $ctrl.getSignature()">Save</button>
+  <button ng-click="$ctrl.clear()"
+          ng-disabled="inline.$invalid">Clear</button>
+</form>
 <br>
 <label>Height: </label> <input type="number" ng-model="$ctrl.height">
 <br>
