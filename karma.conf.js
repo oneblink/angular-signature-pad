@@ -20,6 +20,30 @@ module.exports = function (config) {
       'angular-signature-pad.spec.js'
     ],
 
+    customLaunchers: {
+      ChromeTravisCI: {
+        base: 'Chrome',
+        flags: ['--no-sandbox']
+      }
+    },
+
+    // configuration
+    detectBrowsers: {
+      // post processing of browsers list
+      // here you can edit the list of browsers used by karma
+      postDetection: function (availableBrowsers) {
+        // Replace Chrome with ChromeTravisCI for travis builds
+        if (process.env.TRAVIS) {
+          var chromeIndex = availableBrowsers.indexOf('Chrome')
+
+          if (chromeIndex !== -1) {
+            availableBrowsers[chromeIndex] = 'ChromeTravisCI'
+          }
+        }
+        return availableBrowsers
+      }
+    },
+
     // list of files to exclude
     exclude: [
     ],
