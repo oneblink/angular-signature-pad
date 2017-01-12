@@ -15,7 +15,7 @@ module.exports = function (config) {
     files: [
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
-      'node_modules/signature_pad/signature_pad.js',
+      'node_modules/signature_pad/dist/signature_pad.js',
       'angular-signature-pad.js',
       'angular-signature-pad.spec.js'
     ],
