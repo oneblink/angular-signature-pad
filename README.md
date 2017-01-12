@@ -90,7 +90,7 @@ For more details on `$scope.$watch` best practices, see [Scope `$watch` Performa
 
 1.  Clone this repository
 
-    **Note**: The master branch can contain undocumented or backward compatibility breaking changes. Should checkout the latest release before running the demo.
+    **Note**: The master branch can contain undocumented or backward compatibility breaking changes. You should checkout the latest release before running the demo.
 
 1.  Install dependencies
 
