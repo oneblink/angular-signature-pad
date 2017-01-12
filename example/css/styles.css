@@ -1,0 +1,75 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 10px;
+  background: lightgrey;
+}
+
+h1, h3 {
+  margin: 10px 0
+}
+
+button {
+  margin-bottom: 10px;
+}
+
+img {
+  display: block;
+  border: 1px grey solid;
+}
+
+bm-signature-pad {
+  border-radius: 4px;
+}
+
+canvas {
+  background: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.08) inset;
+}
+
+/* Inline Example */
+signature-inline bm-signature-pad {
+  display: block;
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+/* Popup Example */
+signature-popup .popup {
+  background: lightgrey;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+signature-popup .popup bm-signature-pad {
+  position: absolute;
+  top: 10px;
+  bottom: 40px;
+  right: 10px;
+  left: 10px;
+}
+
+signature-popup .popup button {
+  position: absolute;
+  bottom: 0;
+}
+
+signature-popup .popup button.save {
+  right: 10px;
+}
+
+signature-popup .popup button.cancel {
+  right: 70px;
+}
+
+signature-popup .popup button.clear {
+  left: 10px;
+}

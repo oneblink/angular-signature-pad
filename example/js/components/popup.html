@@ -1,0 +1,24 @@
+<div class="popup"
+     data-ng-show="$ctrl.show"
+     data-ng-form="popup">
+  <bm-signature-pad ng-model="$ctrl.tempSignature"
+                    required
+                    options="{ penColor: 'green' }"
+                    crop="true"
+                    scale-down="true"
+                    resize="$ctrl.resize = $fn"></bm-signature-pad>
+
+  <button class="option clear"
+          ng-click="$ctrl.tempSignature = undefined"
+          ng-disabled="popup.$invalid">Clear</button>
+  <button class="option cancel"
+          ng-click="$ctrl.show = false">Cancel</button>
+  <button class="option save"
+          ng-click="$ctrl.signature = $ctrl.tempSignature; $ctrl.show = false">Save</button>
+</div>
+
+<h3>Popup</h3>
+<button ng-click="$ctrl.tempSignature = $ctrl.signature; $ctrl.show = true">Signature</button>
+
+<img ng-show="$ctrl.signature"
+     ng-src="{{ $ctrl.signature }}"></image>
