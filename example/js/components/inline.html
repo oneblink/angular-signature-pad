@@ -13,7 +13,7 @@
           ng-disabled="inline.$invalid">Clear</button>
 </form>
 <br>
-<label>Height: </label> <input type="number" ng-model="$ctrl.height">
+<label>Height: </label> <input type="number" ng-model="$ctrl.height" ng-model-options="{ debounce: 1000 }">
 <br>
 <label>Crop: <input type="checkbox" ng-model="$ctrl.crop"></label>
 <br>
