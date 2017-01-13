@@ -29,7 +29,7 @@ This means you must execute the exposed functions from your own buttons, events 
     <!DOCTYPE html>
     <html ng-app="app">
     <head>
-      <script src="node_modules/signature_pad/signature_pad.js"></script>
+      <script src="node_modules/signature_pad/dist/signature_pad.js"></script>
       <script src="node_modules/@blinkmobile/angular-signature-pad/angular-signature-pad.js"></script>
     </head>
     <body>
@@ -45,6 +45,8 @@ This means you must execute the exposed functions from your own buttons, events 
 ```html
 <bm-signature-pad ng-model="$ctrl.signature"></bm-signature-pad>
 
+<button ng-click="$ctrl.signature = undefined">Clear</button>
+
 <img ng-show="$ctrl.signature"
      ng-src="{{ $ctrl.signature }}"></image>
 ```
@@ -55,7 +57,7 @@ _All attributes are optional with the exception of ngModel_
 
 Attribute       |Value       |Comments
 ----------------|------------|--------
-`ngModel`       |String      |Reference to bind value of signature pad to. When `ngModel` is set, `crop`, `imageType` and `imageEncoder` attribute values will be used. `ngModel` is set to as a [DataUrl](https://developer.mozilla.org/en-US/docs/Web/HTTP/BasURIs).<br>Will be set to `undefined` if the canvas is empty<br>If the value of the `crop` attribute is truthy, the signature will be cropped of white space before generating a DataUrl<br>Otherwise the DataUrl will contain the entire canvas
+`ngModel`       |String      |Reference to bind value of signature pad to. When `ngModel` is set, `crop`, `imageType` and `imageEncoder` attribute values will be used. `ngModel` is set to a [DataUrl](https://developer.mozilla.org/en-US/docs/Web/HTTP/BasURIs).<br>Will be set to `undefined` if the canvas is empty<br>If the value of the `crop` attribute is truthy, the signature will be cropped of white space before generating a DataUrl<br>Otherwise the DataUrl will contain the entire canvas
 `options`       |Object      |All [signature_pad options](https://github.com/szimek/signature_pad#options) are valid.
 `crop`          |Expression  |Return a truthy value if the signature should be cropped of white space when `ngModel` is set.
 `imageType`     |Expression  |Return an image type to use when `ngModel` is set. See [HTMLCanvasElement.toDataUrl() type parameter](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL#Parameters) for options and default
@@ -69,7 +71,7 @@ Attribute       |Value       |Comments
 
     > The displayed size of the canvas can be changed using a stylesheet. The image is scaled during rendering to fit the styled size. If your renderings seem distorted, try specifying your width and height attributes explicitly in the <canvas> attributes, and not using CSS.
 
--   If you would like the background of the `canvas` to be something other than white, use CSS to change the background instead of setting the `options.backgroundColor`. Setting this option will prevent cropping from working correctly.
+-   If you would like the background of the `canvas` to be something other than transparent, use CSS to change the background instead of setting the `options.backgroundColor`. Setting this option will prevent cropping from working correctly.
 
 ## Example
 
