@@ -4,6 +4,7 @@
                     required
                     options="{ penColor: 'blue' }"
                     crop="$ctrl.crop"
+                    image-type="$ctrl.imageType"
                     scale-down="$ctrl.scaleDown"
                     resize="$ctrl.resize = $fn"
                     ng-style="{ 'height': $ctrl.height + 'px' }"></bm-signature-pad>
@@ -17,6 +18,12 @@
 <label>Crop: <input type="checkbox" ng-model="$ctrl.crop"></label>
 <br>
 <label>Scale down on resize: <input type="checkbox" ng-model="$ctrl.scaleDown"></label>
+<br>
+<label>Image Type: </label>
+<br>
+<label>PNG<input type="radio" ng-model="$ctrl.imageType" value="image/png"></label>
+<label>JPEG<input type="radio" ng-model="$ctrl.imageType" value="image/jpeg"></label>
+<label>SVG<input type="radio" ng-model="$ctrl.imageType" value="image/svg+xml"></label>
 
 <img ng-show="$ctrl.signature"
      ng-src="{{ $ctrl.signature }}"></image>

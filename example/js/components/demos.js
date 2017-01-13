@@ -9,6 +9,7 @@ function SignatureInlineController ($scope, $element, $window, $log) {
   vm.height = 100
   vm.crop = true
   vm.scaleDown = true
+  vm.imageType = 'image/png'
 
   // Watch for changes to parent element's height and width to resize canvas
   $scope.$watchGroup([function () {
