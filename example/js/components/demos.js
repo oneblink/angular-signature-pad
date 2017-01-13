@@ -26,10 +26,13 @@ function SignatureInlineController ($scope, $element, $window, $log) {
   function resize () {
     $scope.$digest()
   }
-  windowEle.on('resize', resize)
-  $scope.$on('$destroy', function () {
+
+  vm.$onInit = function () {
+    windowEle.on('resize', resize)
+  }
+  vm.$onDestroy = function () {
     windowEle.off('resize', resize)
-  })
+  }
 }
 
 SignaturePopupController.$inject = ['$scope', '$element', '$window', '$log']
@@ -45,10 +48,13 @@ function SignaturePopupController ($scope, $element, $window, $log) {
       vm.resize()
     }
   }
-  windowEle.on('resize', resize)
-  $scope.$on('$destroy', function () {
+
+  vm.$onInit = function () {
+    windowEle.on('resize', resize)
+  }
+  vm.$onDestroy = function () {
     windowEle.off('resize', resize)
-  })
+  }
 }
 
 var signatureInlineComponent = {
