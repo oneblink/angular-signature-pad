@@ -3,9 +3,9 @@
 const angular = require('angular')
 const SignaturePad = require('signature_pad')
 
-BmSignaturePadController.$inject = ['$scope', '$element', '$window', '$log']
+BmSignaturePadController.$inject = ['$scope', '$element', '$attrs', '$window', '$log']
 
-function BmSignaturePadController ($scope, $element, $window, $log) {
+function BmSignaturePadController ($scope, $element, $attrs, $window, $log) {
   if (!SignaturePad) {
     $log.error('SignaturePad is required')
     return
@@ -82,6 +82,11 @@ function BmSignaturePadController ($scope, $element, $window, $log) {
       } else {
         signaturePad.clear()
       }
+    }
+
+    // Observe changes to disabled attribute if using ngDisabled
+    if ($attrs.ngDisabled) {
+      $attrs.$observe('disabled', (disabled) => disabled ? signaturePad.off() : signaturePad.on())
     }
   }
 }

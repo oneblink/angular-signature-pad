@@ -1,6 +1,7 @@
 <h3>Inline</h3>
 <form name="inline">
   <bm-signature-pad ng-model="$ctrl.signature"
+                    ng-disabled="$ctrl.disabled"
                     required
                     options="{ penColor: 'blue' }"
                     crop="$ctrl.crop"
@@ -10,7 +11,8 @@
                     ng-style="{ 'height': $ctrl.height + 'px' }"></bm-signature-pad>
 
   <button ng-click="$ctrl.signature = undefined"
-          ng-disabled="inline.$invalid">Clear</button>
+          ng-disabled="inline.$invalid || $ctrl.disabled">Clear</button>
+  <button ng-click="$ctrl.disabled = !$ctrl.disabled">{{$ctrl.disabled ? 'Enable' : 'Disable'}}</button>
 </form>
 <br>
 <label>Height: </label> <input type="number" ng-model="$ctrl.height" ng-model-options="{ debounce: 1000 }">

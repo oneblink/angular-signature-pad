@@ -23,9 +23,9 @@
 })(this, function (module, angular, SignaturePad) {
   'use strict';
 
-  BmSignaturePadController.$inject = ['$scope', '$element', '$window', '$log'];
+  BmSignaturePadController.$inject = ['$scope', '$element', '$attrs', '$window', '$log'];
 
-  function BmSignaturePadController($scope, $element, $window, $log) {
+  function BmSignaturePadController($scope, $element, $attrs, $window, $log) {
     if (!SignaturePad) {
       $log.error('SignaturePad is required');
       return;
@@ -108,6 +108,13 @@
           signaturePad.clear();
         }
       };
+
+      // Observe changes to disabled attribute if using ngDisabled
+      if ($attrs.ngDisabled) {
+        $attrs.$observe('disabled', function (disabled) {
+          return disabled ? signaturePad.off() : signaturePad.on();
+        });
+      }
     };
   }
 
