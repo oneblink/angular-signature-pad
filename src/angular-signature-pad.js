@@ -31,15 +31,12 @@ function BmSignaturePadController ($scope, $element, $window, $log) {
         return undefined
       }
 
+      signaturePad.crop = vm.crop && vm.crop()
       const args = [
         vm.imageType ? vm.imageType() : undefined,
         vm.imageEncoder ? vm.imageEncoder() : undefined
       ]
-      if (vm.crop && vm.crop()) {
-        return signaturePad.toDataURLCropped(...args)
-      } else {
-        return signaturePad.toDataURL(...args)
-      }
+      return signaturePad.toDataURL(...args)
     }
 
     // Need to wrap the a onBegin and onEnd in an $apply to ensure a digest cycle is started
@@ -74,7 +71,14 @@ function BmSignaturePadController ($scope, $element, $window, $log) {
     // Specify how UI should be updated
     vm.ngModel.$render = () => {
       if (vm.ngModel.$viewValue) {
-        signaturePad.fromDataURL(vm.ngModel.$viewValue)
+        var image = new Image();
+
+        signaturePad._reset();
+        image.src = vm.ngModel.$viewValue;
+        image.onload = function () {
+          signaturePad.drawImage(image);
+        };
+        signaturePad._isEmpty = false;
       } else {
         signaturePad.clear()
       }

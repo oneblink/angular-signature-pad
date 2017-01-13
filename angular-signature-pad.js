@@ -47,20 +47,15 @@
     vm.$onInit = function () {
       var opts = vm.options || {};
       var getSignature = function getSignature() {
+        var _signaturePad;
+
         if (!signaturePad || signaturePad.isEmpty()) {
           return undefined;
         }
 
+        signaturePad.crop = vm.crop && vm.crop();
         var args = [vm.imageType ? vm.imageType() : undefined, vm.imageEncoder ? vm.imageEncoder() : undefined];
-        if (vm.crop && vm.crop()) {
-          var _signaturePad;
-
-          return (_signaturePad = signaturePad).toDataURLCropped.apply(_signaturePad, args);
-        } else {
-          var _signaturePad2;
-
-          return (_signaturePad2 = signaturePad).toDataURL.apply(_signaturePad2, args);
-        }
+        return (_signaturePad = signaturePad).toDataURL.apply(_signaturePad, args);
       };
 
       // Need to wrap the a onBegin and onEnd in an $apply to ensure a digest cycle is started
@@ -101,7 +96,14 @@
       // Specify how UI should be updated
       vm.ngModel.$render = function () {
         if (vm.ngModel.$viewValue) {
-          signaturePad.fromDataURL(vm.ngModel.$viewValue);
+          var image = new Image();
+
+          signaturePad._reset();
+          image.src = vm.ngModel.$viewValue;
+          image.onload = function () {
+            signaturePad.drawImage(image);
+          };
+          signaturePad._isEmpty = false;
         } else {
           signaturePad.clear();
         }
