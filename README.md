@@ -12,7 +12,7 @@ This means you must execute the exposed functions from your own buttons, events 
 1.  Install this module and [signature_pad](https://github.com/szimek/signature_pad) using npm
 
     ```
-    npm install @blinkmobile/angular-signature-pad signature_pad@1.5.x --save
+    npm install @blinkmobile/angular-signature-pad signature_pad@1.x --save
     ```
 
 1.  Add the module to your app
