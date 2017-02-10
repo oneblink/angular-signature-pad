@@ -1,12 +1,13 @@
 {
   "name": "@blinkmobile/angular-signature-pad",
   "description": "AngularJS 1.x component for smooth canvas based signature drawing",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0",
   "author": "Matt Carroll <matt@blinkmobile.com.au> (https://github.com/mymattcarroll)",
   "bugs": {
     "url": "https://github.com/blinkmobile/angular-signature-pad/issues"
   },
   "devDependencies": {
+    "@blinkmobile/canvas-manipulation": "1.0.1",
     "angular": "1.6.1",
     "angular-mocks": "1.6.1",
     "babel-plugin-transform-es2015-modules-umd": "^6.18.0",
@@ -38,7 +39,7 @@
     "remark-cli": "^2.1.0",
     "remark-lint": "^5.4.0",
     "remark-preset-lint-recommended": "^1.0.0",
-    "signature_pad": "github:mymattcarroll/signature_pad#39e154ebaaa09c4a1c4b332131810e20481fd803"
+    "signature_pad": "1.6.0-beta.6"
   },
   "directories": {
     "example": "example"
@@ -48,8 +49,7 @@
     "npm": ">=3"
   },
   "files": [
-    "angular-signature-pad.js",
-    "angular-signature-pad.min.js"
+    "dist"
   ],
   "homepage": "https://github.com/blinkmobile/angular-signature-pad#readme",
   "keywords": [
@@ -59,7 +59,7 @@
     "signature"
   ],
   "license": "MIT",
-  "main": "angular-signature-pad.js",
+  "main": "dist/angular-signature-pad.js",
   "publishConfig": {
     "access": "public"
   },

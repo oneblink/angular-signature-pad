@@ -1,5 +1,5 @@
 /*
- * @blinkmobile/angular-signature-pad: v1.0.0-alpha.1
+ * @blinkmobile/angular-signature-pad: v1.0.0
  * https://github.com/blinkmobile/angular-signature-pad#readme
  *
  * Copyright 2017 BlinkMobile
@@ -10,17 +10,17 @@
  */
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['module', 'angular', 'signature_pad'], factory);
+    define(['module', 'angular', 'signature_pad', '@blinkmobile/canvas-manipulation'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(module, require('angular'), require('signature_pad'));
+    factory(module, require('angular'), require('signature_pad'), require('@blinkmobile/canvas-manipulation'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod, global.angular, global.SignaturePad);
+    factory(mod, global.angular, global.SignaturePad, global.canvasManipulation);
     global.angularSignaturePad = mod.exports;
   }
-})(this, function (module, angular, SignaturePad) {
+})(this, function (module, angular, SignaturePad, canvasManipulation) {
   'use strict';
 
   BmSignaturePadController.$inject = ['$scope', '$element', '$attrs', '$window', '$log'];
@@ -47,18 +47,21 @@
     vm.$onInit = function () {
       var opts = vm.options || {};
       var getSignature = function getSignature() {
-        var _signaturePad;
-
         if (!signaturePad || signaturePad.isEmpty()) {
           return undefined;
         }
 
-        signaturePad.crop = vm.crop && vm.crop();
         var args = [vm.imageType ? vm.imageType() : undefined, vm.imageEncoder ? vm.imageEncoder() : undefined];
-        return (_signaturePad = signaturePad).toDataURL.apply(_signaturePad, args);
+        if (vm.crop && vm.crop()) {
+          return canvasManipulation.toDataURLCropped.apply(canvasManipulation, [canvas].concat(args));
+        } else {
+          var _signaturePad;
+
+          return (_signaturePad = signaturePad).toDataURL.apply(_signaturePad, args);
+        }
       };
 
-      // Need to wrap the a onBegin and onEnd in an $apply to ensure a digest cycle is started
+      // Need to wrap the onBegin and onEnd in an $apply to ensure a digest cycle is started
       var wrapFunction = function wrapFunction(fn) {
         if (angular.isFunction(fn)) {
           return function () {
@@ -83,8 +86,19 @@
       if (vm.resize) {
         vm.resize({
           $fn: function $fn() {
-            signaturePad.resize(element.clientWidth, element.clientHeight, vm.scaleDown && vm.scaleDown());
-            vm.ngModel.$setViewValue(getSignature());
+            var width = element.clientWidth;
+            var height = element.clientHeight;
+            // If canvas is empty we dont need to call resize or set the model
+            if (vm.ngModel.$isEmpty()) {
+              canvas.width = width;
+              canvas.height = height;
+            } else {
+              var contentPreserved = canvasManipulation.resize(canvas, width, height, vm.scaleDown && vm.scaleDown());
+              if (!contentPreserved) {
+                signaturePad.clear();
+              }
+              vm.ngModel.$setViewValue(getSignature());
+            }
           }
         });
       }
@@ -101,7 +115,7 @@
           signaturePad._reset();
           image.src = vm.ngModel.$viewValue;
           image.onload = function () {
-            signaturePad.drawImage(image);
+            canvasManipulation.drawImageCentered(canvas, image);
           };
           signaturePad._isEmpty = false;
         } else {

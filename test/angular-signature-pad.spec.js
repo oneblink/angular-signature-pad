@@ -33,7 +33,7 @@ describe('bmSignaturePad', function () {
     expect($ctrl.ngModel.$render).toHaveBeenCalled()
   })
 
-  it('should call expose a resize function during $onInit()', function () {
+  it('should expose a resize function during $onInit()', function () {
     expect($scope.resizeSignaturePad).toBeDefined()
     expect($ctrl.resize).toBeDefined()
 

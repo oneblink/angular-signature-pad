@@ -2,6 +2,7 @@
 
 const angular = require('angular')
 const SignaturePad = require('signature_pad')
+const canvasManipulation = require('@blinkmobile/canvas-manipulation')
 
 BmSignaturePadController.$inject = ['$scope', '$element', '$attrs', '$window', '$log']
 
@@ -31,15 +32,18 @@ function BmSignaturePadController ($scope, $element, $attrs, $window, $log) {
         return undefined
       }
 
-      signaturePad.crop = vm.crop && vm.crop()
       const args = [
         vm.imageType ? vm.imageType() : undefined,
         vm.imageEncoder ? vm.imageEncoder() : undefined
       ]
-      return signaturePad.toDataURL(...args)
+      if (vm.crop && vm.crop()) {
+        return canvasManipulation.toDataURLCropped(canvas, ...args)
+      } else {
+        return signaturePad.toDataURL(...args)
+      }
     }
 
-    // Need to wrap the a onBegin and onEnd in an $apply to ensure a digest cycle is started
+    // Need to wrap the onBegin and onEnd in an $apply to ensure a digest cycle is started
     const wrapFunction = (fn) => {
       if (angular.isFunction(fn)) {
         return () => $scope.$apply(() => fn())
@@ -60,8 +64,19 @@ function BmSignaturePadController ($scope, $element, $attrs, $window, $log) {
     if (vm.resize) {
       vm.resize({
         $fn: () => {
-          signaturePad.resize(element.clientWidth, element.clientHeight, vm.scaleDown && vm.scaleDown())
-          vm.ngModel.$setViewValue(getSignature())
+          const width = element.clientWidth
+          const height = element.clientHeight
+          // If canvas is empty we dont need to call resize or set the model
+          if (vm.ngModel.$isEmpty()) {
+            canvas.width = width
+            canvas.height = height
+          } else {
+            const contentPreserved = canvasManipulation.resize(canvas, width, height, vm.scaleDown && vm.scaleDown())
+            if (!contentPreserved) {
+              signaturePad.clear()
+            }
+            vm.ngModel.$setViewValue(getSignature())
+          }
         }
       })
     }
@@ -76,7 +91,7 @@ function BmSignaturePadController ($scope, $element, $attrs, $window, $log) {
         signaturePad._reset();
         image.src = vm.ngModel.$viewValue;
         image.onload = function () {
-          signaturePad.drawImage(image);
+          canvasManipulation.drawImageCentered(canvas, image);
         };
         signaturePad._isEmpty = false;
       } else {
