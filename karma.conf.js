@@ -16,8 +16,9 @@ module.exports = function (config) {
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
       'node_modules/signature_pad/dist/signature_pad.js',
-      'angular-signature-pad.js',
-      'angular-signature-pad.spec.js'
+      'node_modules/@blinkmobile/canvas-manipulation/dist/canvas-manipulation.js',
+      'dist/angular-signature-pad.js',
+      'test/*.spec.js'
     ],
 
     customLaunchers: {

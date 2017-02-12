@@ -9,10 +9,10 @@ This means you must execute the exposed functions from your own buttons, events 
 
 ## Installation
 
-1.  Install this module and [signature_pad](https://github.com/szimek/signature_pad) using npm
+1.  Install this module, [canvas-manipulation](https://github.com/blinkmobile/canvas-manipulation) and [signature_pad](https://github.com/szimek/signature_pad) using npm
 
     ```
-    npm install @blinkmobile/angular-signature-pad signature_pad@1.x --save
+    npm install @blinkmobile/angular-signature-pad @blinkmobile/canvas-manipulation@1.x signature_pad@1.x --save
     ```
 
 1.  Add the module to your app
@@ -23,14 +23,15 @@ This means you must execute the exposed functions from your own buttons, events 
     ]);
     ```
 
-1.  Ensure these two modules are loaded e.g.
+1.  Ensure these three modules are loaded e.g.
 
     ```html
     <!DOCTYPE html>
     <html ng-app="app">
     <head>
       <script src="node_modules/signature_pad/dist/signature_pad.js"></script>
-      <script src="node_modules/@blinkmobile/angular-signature-pad/angular-signature-pad.js"></script>
+      <script src="node_modules/@blinkmobile/canvas-manipulation/dist/canvas-manipulation.js"></script>
+      <script src="node_modules/@blinkmobile/angular-signature-pad/dist/angular-signature-pad.js"></script>
     </head>
     <body>
       ...
@@ -57,13 +58,13 @@ _All attributes are optional with the exception of ngModel_
 
 Attribute       |Value       |Comments
 ----------------|------------|--------
-`ngModel`       |String      |Reference to bind value of signature pad to. When `ngModel` is set, `crop`, `imageType` and `imageEncoder` attribute values will be used. `ngModel` is set to a [DataUrl](https://developer.mozilla.org/en-US/docs/Web/HTTP/BasURIs).<br>Will be set to `undefined` if the canvas is empty<br>If the value of the `crop` attribute is truthy, the signature will be cropped of white space before generating a DataUrl<br>Otherwise the DataUrl will contain the entire canvas
+`ng-model`      |String      |Reference to bind value of signature pad to. When `ngModel` is set, `crop`, `image-type` and `image-encoder` attribute values will be used. `ngModel` is set to a [DataUrl](https://developer.mozilla.org/en-US/docs/Web/HTTP/BasURIs).<br>Will be set to `undefined` if the canvas is empty<br>If the value of the `crop` attribute is truthy, the signature will be cropped of white space before generating a DataUrl<br>Otherwise the DataUrl will contain the entire canvas
 `options`       |Object      |All [signature_pad options](https://github.com/szimek/signature_pad#options) are valid.
 `crop`          |Expression  |Return a truthy value if the signature should be cropped of white space when `ngModel` is set.
-`imageType`     |Expression  |Return an image type to use when `ngModel` is set. See [HTMLCanvasElement.toDataUrl() type parameter](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL#Parameters) for options and default
-`imageEncoder`  |Expression  |Return an image encoder to use when `ngModel` is set. See [HTMLCanvasElement.toDataUrl() encoderOptions parameter](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL#Parameters) for options and default
+`image-type`    |Expression  |Return an image type to use when `ngModel` is set. See [HTMLCanvasElement.toDataUrl() type parameter](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL#Parameters) for options and default
+`image-encoder` |Expression  |Return an image encoder to use when `ngModel` is set. See [HTMLCanvasElement.toDataUrl() encoderOptions parameter](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL#Parameters) for options and default
 `scale-down`    |Expression  |Return a truthy value if the signature should be scaled down when calling the function exposed via `resize`.
-`resize`        |Expression  |Exposes the `resize()` function provided by _signature_pad_  as `$fn`. However, the `width` and `height` will be set to width and height of the canvas' parent element and the `scaleDown` argument will be set to the value of the `scale-down` attribute.
+`resize`        |Expression  |Exposes the `resize()` function provided by _@blinkmobile/canvas-manipulation_  as `$fn`. However, the `width` and `height` will be set to width and height of the canvas' parent element and the `scaleDown` argument will be set to the value of the `scale-down` attribute.
 
 ### Recommendations
 

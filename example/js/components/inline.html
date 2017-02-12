@@ -17,7 +17,7 @@
 <br>
 <label>Height: </label> <input type="number" ng-model="$ctrl.height" ng-model-options="{ debounce: 1000 }">
 <br>
-<label>Crop: <input type="checkbox" ng-model="$ctrl.crop"></label>
+<label>Crop: <input type="checkbox" ng-model="$ctrl.crop" ng-disabled="$ctrl.imageType === 'image/svg+xml'"></label> <b ng-show="$ctrl.imageType === 'image/svg+xml'">SVG does not support cropping</b>
 <br>
 <label>Scale down on resize: <input type="checkbox" ng-model="$ctrl.scaleDown"></label>
 <br>
@@ -25,7 +25,7 @@
 <br>
 <label>PNG<input type="radio" ng-model="$ctrl.imageType" value="image/png"></label>
 <label>JPEG<input type="radio" ng-model="$ctrl.imageType" value="image/jpeg"></label>
-<label>SVG<input type="radio" ng-model="$ctrl.imageType" value="image/svg+xml"></label>
+<label>SVG<input type="radio" ng-model="$ctrl.imageType" value="image/svg+xml" ng-change="$ctrl.crop = $ctrl.imageType !== 'image/svg+xml'"></label>
 
 <img ng-show="$ctrl.signature"
      ng-src="{{ $ctrl.signature }}"></image>

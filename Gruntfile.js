@@ -9,14 +9,15 @@ module.exports = function (grunt) {
         plugins: [['transform-es2015-modules-umd', {
           exactGlobals: true,
           globals: {
-            signature_pad: 'SignaturePad'
+            'signature_pad': 'SignaturePad',
+            '@blinkmobile/canvas-manipulation': 'canvasManipulation'
           }
         }]],
         presets: ['es2015']
       },
       prod: {
         files: {
-          'angular-signature-pad.js': ['src/angular-signature-pad.js']
+          'dist/angular-signature-pad.js': ['src/angular-signature-pad.js']
         }
       }
     },
@@ -27,7 +28,7 @@ module.exports = function (grunt) {
           preserveComments: false
         },
         files: {
-          'angular-signature-pad.min.js': ['angular-signature-pad.js']
+          'dist/angular-signature-pad.min.js': ['dist/angular-signature-pad.js']
         }
       }
     },
@@ -48,7 +49,7 @@ module.exports = function (grunt) {
 `
         },
         files: {
-          'angular-signature-pad.js': ['angular-signature-pad.js']
+          'dist/angular-signature-pad.js': ['dist/angular-signature-pad.js']
         }
       },
       prod: {
@@ -60,7 +61,7 @@ module.exports = function (grunt) {
 `
         },
         files: {
-          'angular-signature-pad.min.js': ['angular-signature-pad.min.js']
+          'dist/angular-signature-pad.min.js': ['dist/angular-signature-pad.min.js']
         }
       }
     }
