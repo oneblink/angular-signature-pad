@@ -6,6 +6,7 @@
   "bugs": {
     "url": "https://github.com/blinkmobile/angular-signature-pad/issues"
   },
+  "dependencies": {},
   "devDependencies": {
     "@blinkmobile/canvas-manipulation": "1.0.1",
     "angular": "1.6.4",
@@ -42,7 +43,8 @@
     "signature_pad": "2.0.0"
   },
   "directories": {
-    "example": "example"
+    "example": "example",
+    "test": "test"
   },
   "engines": {
     "node": ">=6",
@@ -72,8 +74,8 @@
     "eslint": "eslint --fix --cache .",
     "fixpack": "fixpack",
     "flow_check": "flow check",
-    "posttest": "npm run eslint && npm run flow_check && npm run remark && npm run fixpack",
-    "pretest": "npm run build",
+    "posttest": "npm run eslint && npm run flow_check && npm run remark",
+    "pretest": "npm run build && npm run fixpack",
     "remark": "remark . --use remark-preset-lint-recommended",
     "start": "http-server",
     "test": "karma start"
