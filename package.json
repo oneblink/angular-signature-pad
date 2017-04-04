@@ -74,7 +74,7 @@
     "flow_check": "flow check",
     "posttest": "npm run eslint && npm run flow_check && npm run remark && npm run fixpack",
     "pretest": "npm run build",
-    "remark": "remark . --preset lint-recommended",
+    "remark": "remark . --use remark-preset-lint-recommended",
     "start": "http-server",
     "test": "karma start"
   }
