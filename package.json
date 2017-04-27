@@ -41,7 +41,7 @@
     "remark-cli": "^3.0.0",
     "remark-lint": "^6.0.0",
     "remark-preset-lint-recommended": "^2.0.0",
-    "signature_pad": "2.1.0"
+    "signature_pad": "2.1.1"
   },
   "directories": {
     "example": "example",
