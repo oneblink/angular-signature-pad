@@ -41,7 +41,7 @@
     "remark-cli": "^3.0.0",
     "remark-lint": "^6.0.0",
     "remark-preset-lint-recommended": "^2.0.0",
-    "signature_pad": "2.1.1"
+    "signature_pad": "2.2.0"
   },
   "directories": {
     "example": "example",
@@ -78,7 +78,7 @@
     "posttest": "npm run eslint && npm run flow_check && npm run remark",
     "pretest": "npm run build && npm run fixpack",
     "remark": "remark . --use remark-preset-lint-recommended",
-    "start": "http-server",
+    "start": "http-server -o",
     "test": "karma start"
   }
 }
