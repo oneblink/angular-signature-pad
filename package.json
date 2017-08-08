@@ -24,7 +24,7 @@
     "fixpack": "^2.3.1",
     "flow-bin": "^0.52.0",
     "grunt": "^1.0.1",
-    "grunt-babel": "^6.0.0",
+    "grunt-babel": "^7.0.0",
     "grunt-contrib-uglify": "^3.0.0",
     "http-server": "^0.10.0",
     "jasmine-core": "^2.5.2",
