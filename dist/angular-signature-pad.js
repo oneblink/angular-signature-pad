@@ -36,8 +36,8 @@
     var signaturePad = void 0;
 
     // Set canvas initial size to fill parent element: <bm-signature-pad></bm-signature-pad>
-    canvas.width = element.clientWidth;
-    canvas.height = element.clientHeight;
+    canvas.width = element.attributes.width ? element.attributes.width.value : element.clientWidth;
+    canvas.height = element.attributes.height ? element.attributes.height.value : element.clientHeight;
 
     vm.$onDestroy = function () {
       if (signaturePad && angular.isFunction(signaturePad.off)) {
