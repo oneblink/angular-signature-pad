@@ -44,12 +44,16 @@ This means you must execute the exposed functions from your own buttons, events 
 ### Basics
 
 ```html
-<bm-signature-pad ng-model="$ctrl.signature"></bm-signature-pad>
+<!--
+  Note the use of CSS to manage the width and height of the component
+  instead of managing the width and height of the canvas element
+-->
+<bm-signature-pad ng-model="$ctrl.signature" style="width:100%;height:100px"></bm-signature-pad>
 
 <button ng-click="$ctrl.signature = undefined">Clear</button>
 
 <img ng-show="$ctrl.signature"
-     ng-src="{{ $ctrl.signature }}"></image>
+     ng-src="{{ $ctrl.signature }}"></img>
 ```
 
 ### Attributes
@@ -68,13 +72,15 @@ Attribute       |Value       |Comments
 
 ### Recommendations
 
--   Try not to use CSS to manage the `width` or `height` of the `canvas` element. Instead, make use of the exposed `resize()` function which will change the `width` and `height` attributes of the canvas. For more details, see [Sizing The Canvas](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas#Sizing_the_canvas)
+-   Use CSS to manage the `width` and `height` of the `<bm-signature-pad>` element. During intialisation, the dimensions of the `<canvas>` element will be set to the dimensions of the `<bm-signature-pad>` element. If the dimensions of `<bm-signature-pad>` element change for any reason (e.g. browser resize or orientation change on a mobile device) make use of the exposed `resize()` function which will reset the `width` and `height` attributes of the `<canvas>` element. See the [Hosted Example](https://blinkmobile.github.io/angular-signature-pad/) to see this in action. For more details regarding Canvas elements, see [Sizing The Canvas](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas#Sizing_the_canvas)
 
     > The displayed size of the canvas can be changed using a stylesheet. The image is scaled during rendering to fit the styled size. If your renderings seem distorted, try specifying your width and height attributes explicitly in the <canvas> attributes, and not using CSS.
 
 -   If you would like the background of the `canvas` to be something other than transparent, use CSS to change the background instead of setting the `options.backgroundColor`. Setting this option will prevent cropping from working correctly.
 
 ## Example
+
+-   [Hosted Example](https://blinkmobile.github.io/angular-signature-pad/)
 
 **Note**: The examples make use of a `resize` event on the `window` object and also `$scope.$watch` a DOM element property.
 Both of these practices are valid JavaScript and AngularJS, however, neither are ideal in production circumstances.
@@ -87,7 +93,7 @@ For more details on `$scope.$watch` best practices, see [Scope `$watch` Performa
 
 > Dirty checking the scope for property changes is a common operation in Angular and for this reason the dirty checking function must be efficient. Care should be taken that the dirty checking function does not do any DOM access, as DOM access is orders of magnitude slower than property access on JavaScript object.
 
-### Instructions
+### Running Example Locally
 
 1.  Install [Node 6.x](https://nodejs.org/en/download/) or higher
 
@@ -107,4 +113,4 @@ For more details on `$scope.$watch` best practices, see [Scope `$watch` Performa
     npm start
     ```
 
-1.  Open [http://localhost:8080/example/](http://localhost:8080/example/) in your browser
+1.  Open [http://localhost:8080/docs/](http://localhost:8080/docs/) in your browser

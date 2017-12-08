@@ -44,7 +44,7 @@
     "signature_pad": "2.3.2"
   },
   "directories": {
-    "example": "example",
+    "docs": "docs",
     "test": "test"
   },
   "engines": {
