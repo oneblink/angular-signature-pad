@@ -9,8 +9,6 @@ addons:
     packages:
       - g++-4.8
 install:
-  - npm install --global npm
-  - npm install --global yarn
   - npm install
 before_script:
   - export CHROME_BIN=chromium-browser
