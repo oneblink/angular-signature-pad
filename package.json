@@ -28,7 +28,7 @@
     "grunt-contrib-uglify": "^3.0.0",
     "http-server": "^0.10.0",
     "jasmine-core": "^2.7.0",
-    "karma": "^1.4.1",
+    "karma": "^2.0.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-detect-browsers": "^2.2.4",
     "karma-edge-launcher": "^0.4.1",
