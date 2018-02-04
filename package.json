@@ -38,7 +38,7 @@
     "karma-opera-launcher": "^1.0.0",
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-safari-launcher": "^1.0.0",
-    "remark-cli": "^4.0.0",
+    "remark-cli": "^5.0.0",
     "remark-lint": "^6.0.0",
     "remark-preset-lint-recommended": "^3.0.0",
     "signature_pad": "2.3.2"
