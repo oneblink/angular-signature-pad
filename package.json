@@ -27,7 +27,7 @@
     "grunt-babel": "^7.0.0",
     "grunt-contrib-uglify": "^3.0.0",
     "http-server": "^0.11.0",
-    "jasmine-core": "^2.7.0",
+    "jasmine-core": "^3.0.0",
     "karma": "^2.0.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-detect-browsers": "^2.2.4",
