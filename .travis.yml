@@ -1,8 +1,9 @@
 language: node_js
-sudo: false
+sudo: required
 node_js:
-  - '6'
+  - '8'
 addons:
+  chrome: stable
   apt:
     sources:
       - ubuntu-toolchain-r-test
