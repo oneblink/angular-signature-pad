@@ -1,7 +1,7 @@
 {
   "name": "@blinkmobile/angular-signature-pad",
   "description": "AngularJS 1.x component for smooth canvas based signature drawing",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Matt Carroll <matt@blinkmobile.com.au> (https://github.com/mymattcarroll)",
   "bugs": {
     "url": "https://github.com/blinkmobile/angular-signature-pad/issues"

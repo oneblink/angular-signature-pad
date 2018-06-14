@@ -1,8 +1,8 @@
 /*
- * @blinkmobile/angular-signature-pad: v1.0.0
+ * @blinkmobile/angular-signature-pad: v1.0.1
  * https://github.com/blinkmobile/angular-signature-pad#readme
  *
- * Copyright 2017 BlinkMobile
+ * Copyright 2018 BlinkMobile
  * Released under the MIT license
  *
  * A thin AngularJS 1.x wrapper around:
@@ -10,23 +10,56 @@
  */
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['module', 'angular', 'signature_pad', '@blinkmobile/canvas-manipulation'], factory);
+    define(['exports', 'angular', 'signature_pad', '@blinkmobile/canvas-manipulation'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(module, require('angular'), require('signature_pad'), require('@blinkmobile/canvas-manipulation'));
+    factory(exports, require('angular'), require('signature_pad'), require('@blinkmobile/canvas-manipulation'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod, global.angular, global.SignaturePad, global.canvasManipulation);
+    factory(mod.exports, global.angular, global.SignaturePad, global.canvasManipulation);
     global.angularSignaturePad = mod.exports;
   }
-})(this, function (module, angular, SignaturePad, canvasManipulation) {
+})(this, function (exports, _angular, _signature_pad, _canvasManipulation) {
   'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _angular2 = _interopRequireDefault(_angular);
+
+  var _signature_pad2 = _interopRequireDefault(_signature_pad);
+
+  var canvasManipulation = _interopRequireWildcard(_canvasManipulation);
+
+  function _interopRequireWildcard(obj) {
+    if (obj && obj.__esModule) {
+      return obj;
+    } else {
+      var newObj = {};
+
+      if (obj != null) {
+        for (var key in obj) {
+          if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+        }
+      }
+
+      newObj.default = obj;
+      return newObj;
+    }
+  }
+
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+      default: obj
+    };
+  }
 
   BmSignaturePadController.$inject = ['$scope', '$element', '$attrs', '$window', '$log'];
 
   function BmSignaturePadController($scope, $element, $attrs, $window, $log) {
-    if (!SignaturePad) {
+    if (!_signature_pad2.default) {
       $log.error('SignaturePad is required');
       return;
     }
@@ -40,7 +73,7 @@
     canvas.height = element.clientHeight;
 
     vm.$onDestroy = function () {
-      if (signaturePad && angular.isFunction(signaturePad.off)) {
+      if (signaturePad && _angular2.default.isFunction(signaturePad.off)) {
         signaturePad.off();
       }
     };
@@ -63,7 +96,7 @@
 
       // Need to wrap the onBegin and onEnd in an $apply to ensure a digest cycle is started
       var wrapFunction = function wrapFunction(fn) {
-        if (angular.isFunction(fn)) {
+        if (_angular2.default.isFunction(fn)) {
           return function () {
             return $scope.$apply(function () {
               return fn();
@@ -75,12 +108,12 @@
       var onEnd = opts.onEnd;
       opts.onEnd = wrapFunction(function () {
         vm.ngModel.$setViewValue(getSignature());
-        if (angular.isFunction(onEnd)) {
+        if (_angular2.default.isFunction(onEnd)) {
           onEnd();
         }
       });
 
-      signaturePad = new SignaturePad(canvas, opts);
+      signaturePad = new _signature_pad2.default(canvas, opts);
 
       // Functions that are made available to the parent component
       if (vm.resize) {
@@ -148,5 +181,5 @@
     }
   };
 
-  module.exports = angular.module('bmSignaturePad', []).component('bmSignaturePad', bmSignaturePadComponent);
+  exports.default = _angular2.default.module('bmSignaturePad', []).component('bmSignaturePad', bmSignaturePadComponent);
 });
