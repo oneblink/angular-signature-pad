@@ -1,8 +1,8 @@
 'use strict'
 
-const angular = require('angular')
-const SignaturePad = require('signature_pad')
-const canvasManipulation = require('@blinkmobile/canvas-manipulation')
+import angular from 'angular'
+import SignaturePad from 'signature_pad'
+import * as canvasManipulation from '@blinkmobile/canvas-manipulation'
 
 BmSignaturePadController.$inject = ['$scope', '$element', '$attrs', '$window', '$log']
 
@@ -122,6 +122,6 @@ const bmSignaturePadComponent = {
   }
 }
 
-module.exports = angular
+export default angular
   .module('bmSignaturePad', [])
   .component('bmSignaturePad', bmSignaturePadComponent)

@@ -23,7 +23,7 @@ module.exports = function (config) {
 
     customLaunchers: {
       ChromeTravisCI: {
-        base: 'Chrome',
+        base: 'ChromeHeadless',
         flags: ['--no-sandbox']
       }
     },
@@ -35,7 +35,7 @@ module.exports = function (config) {
       postDetection: function (availableBrowsers) {
         // Replace Chrome with ChromeTravisCI for travis builds
         if (process.env.TRAVIS) {
-          var chromeIndex = availableBrowsers.indexOf('Chrome')
+          var chromeIndex = availableBrowsers.indexOf('ChromeHeadless')
 
           if (chromeIndex !== -1) {
             availableBrowsers[chromeIndex] = 'ChromeTravisCI'
