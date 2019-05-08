@@ -77,25 +77,26 @@
       }; // Need to wrap the onBegin and onEnd in an $apply to ensure a digest cycle is started
 
 
-      var wrapFunction = function wrapFunction(fn) {
-        if (_angular["default"].isFunction(fn)) {
-          return function () {
-            return $scope.$apply(function () {
-              return fn();
-            });
-          };
-        }
-      };
+      var onBegin = opts.onBegin;
 
-      opts.onBegin = wrapFunction(opts.onBegin);
+      if (_angular["default"].isFunction(onBegin)) {
+        opts.onBegin = function () {
+          onBegin();
+          $scope.$applyAsync();
+        };
+      }
+
       var onEnd = opts.onEnd;
-      opts.onEnd = wrapFunction(function () {
+
+      opts.onEnd = function () {
         vm.ngModel.$setViewValue(getSignature());
 
         if (_angular["default"].isFunction(onEnd)) {
           onEnd();
-        }
-      });
+        } // $scope.$applyAsync()
+
+      };
+
       signaturePad = new _signature_pad["default"](canvas, opts); // Functions that are made available to the parent component
 
       if (vm.resize) {

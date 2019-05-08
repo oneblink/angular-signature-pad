@@ -10,10 +10,11 @@
                     resize="$ctrl.resize = $fn"
                     ng-style="{ 'height': $ctrl.height + 'px' }"></bm-signature-pad>
 
-  <button ng-click="$ctrl.signature = undefined"
+  <button ng-click="$ctrl.signature = undefined; $ctrl.totalStrokes = 0;"
           ng-disabled="inline.$invalid || $ctrl.disabled">Clear</button>
   <button ng-click="$ctrl.disabled = !$ctrl.disabled">{{$ctrl.disabled ? 'Enable' : 'Disable'}}</button>
 </form>
+<div>Total Strokes: {{$ctrl.totalStrokes}}</div>
 <br>
 
 <label>Height: </label>
