@@ -150,6 +150,21 @@
           return disabled ? signaturePad.off() : signaturePad.on();
         });
       }
+
+      if ($attrs.options) {
+        var keys = ['dotSize', 'minWidth', 'maxWidth', 'throttle', 'minDistance', 'backgroundColor', 'penColor', 'velocityFilterWeight'];
+        $scope.$watch(function () {
+          return vm.options;
+        }, function (newValue) {
+          Object.keys(newValue).forEach(function (key) {
+            if (keys.some(function (k) {
+              return k === key;
+            })) {
+              signaturePad[key] = newValue[key];
+            }
+          });
+        }, true);
+      }
     };
   }
 

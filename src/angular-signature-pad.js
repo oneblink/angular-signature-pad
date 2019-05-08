@@ -103,6 +103,26 @@ function BmSignaturePadController ($scope, $element, $attrs, $window, $log) {
     if ($attrs.ngDisabled) {
       $attrs.$observe('disabled', (disabled) => disabled ? signaturePad.off() : signaturePad.on())
     }
+
+    if ($attrs.options) {
+      const keys = [
+        'dotSize',
+        'minWidth',
+        'maxWidth',
+        'throttle',
+        'minDistance',
+        'backgroundColor',
+        'penColor',
+        'velocityFilterWeight',
+      ]
+      $scope.$watch(() => vm.options, (newValue) => {
+        Object.keys(newValue).forEach((key) => {
+          if (keys.some(k => k === key)) {
+            signaturePad[key] = newValue[key]
+          }
+        })
+      }, true)
+    }
   }
 }
 

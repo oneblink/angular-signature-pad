@@ -11,6 +11,12 @@ function SignatureInlineController ($scope, $element, $window, $log) {
   vm.scaleDown = true
   vm.imageType = 'image/png'
 
+  vm.options = {
+    penColor: '#0000FF',
+    dotSize: 0.5,
+    minWidth: 0.5
+  }
+
   // Watch for changes to parent element's height and width to resize canvas
   $scope.$watchGroup([function () {
     return bmSignaturePadEle.clientWidth
