@@ -1,31 +1,74 @@
 <h3>Inline</h3>
 <form name="inline">
-  <bm-signature-pad ng-model="$ctrl.signature"
+  <bm-signature-pad class="cypress-inline-signature-pad"
+                    ng-model="$ctrl.signature"
                     ng-disabled="$ctrl.disabled"
                     required
-                    options="{ penColor: 'blue' }"
+                    options="$ctrl.options"
                     crop="$ctrl.crop"
                     image-type="$ctrl.imageType"
                     scale-down="$ctrl.scaleDown"
                     resize="$ctrl.resize = $fn"
                     ng-style="{ 'height': $ctrl.height + 'px' }"></bm-signature-pad>
 
-  <button ng-click="$ctrl.signature = undefined"
+  <button class="cypress-clear-inline-signature-pad"
+          ng-click="$ctrl.signature = undefined; $ctrl.totalStrokes = 0;"
           ng-disabled="inline.$invalid || $ctrl.disabled">Clear</button>
   <button ng-click="$ctrl.disabled = !$ctrl.disabled">{{$ctrl.disabled ? 'Enable' : 'Disable'}}</button>
 </form>
+<div>Total Strokes: <span class="cypress-total-strokes">{{$ctrl.totalStrokes}}</span></div>
 <br>
-<label>Height: </label> <input type="number" ng-model="$ctrl.height" ng-model-options="{ debounce: 1000 }">
+
+<label>Height: </label>
+<input type="number"
+       ng-model="$ctrl.height"
+       ng-model-options="{ debounce: 1000 }">
 <br>
-<label>Crop: <input type="checkbox" ng-model="$ctrl.crop" ng-disabled="$ctrl.imageType === 'image/svg+xml'"></label> <b ng-show="$ctrl.imageType === 'image/svg+xml'">SVG does not support cropping</b>
+
+<label>Pen Colour: </label>
+<input type="color"
+       ng-model="$ctrl.options.penColor"
+       ng-model-options="{ debounce: 100 }">
 <br>
-<label>Scale down on resize: <input type="checkbox" ng-model="$ctrl.scaleDown"></label>
+
+<label>Dot Size: </label>
+<input type="range"
+       step="0.5"
+       min="0.5"
+       max="10"
+       ng-model="$ctrl.options.dotSize"
+       ng-change="$ctrl.options.minWidth = $ctrl.options.dotSize; $ctrl.options.maxWidth = $ctrl.options.dotSize + 2;"
+       ng-model-options="{ debounce: 100 }">
 <br>
+
+<label>
+  Crop:
+  <input type="checkbox"
+         ng-model="$ctrl.crop"
+         ng-disabled="$ctrl.imageType === 'image/svg+xml'">
+</label>
+<b ng-show="$ctrl.imageType === 'image/svg+xml'">SVG does not support cropping</b>
+<br>
+
+<label>Scale down on resize:
+  <input type="checkbox"
+         ng-model="$ctrl.scaleDown">
+</label>
+<br>
+
 <label>Image Type: </label>
 <br>
-<label>PNG<input type="radio" ng-model="$ctrl.imageType" value="image/png"></label>
-<label>JPEG<input type="radio" ng-model="$ctrl.imageType" value="image/jpeg"></label>
-<label>SVG<input type="radio" ng-model="$ctrl.imageType" value="image/svg+xml" ng-change="$ctrl.crop = $ctrl.imageType !== 'image/svg+xml'"></label>
+<label>PNG<input type="radio"
+         ng-model="$ctrl.imageType"
+         value="image/png"></label>
+<label>JPEG<input type="radio"
+         ng-model="$ctrl.imageType"
+         value="image/jpeg"></label>
+<label>SVG<input type="radio"
+         ng-model="$ctrl.imageType"
+         value="image/svg+xml"
+         ng-change="$ctrl.crop = $ctrl.imageType !== 'image/svg+xml'"></label>
 
-<img ng-show="$ctrl.signature"
+<img class="cypress-inline-img"
+     ng-show="$ctrl.signature"
      ng-src="{{ $ctrl.signature }}"></image>

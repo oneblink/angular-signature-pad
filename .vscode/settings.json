@@ -1,0 +1,7 @@
+{
+  "html.format.wrapAttributes": "force-aligned",
+  "html.format.wrapLineLength": 200,
+  "html.format.endWithNewline": true,
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "eslint.alwaysShowStatus": true
+}

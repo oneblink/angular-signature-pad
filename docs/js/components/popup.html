@@ -20,5 +20,6 @@
 <h3>Popup</h3>
 <button ng-click="$ctrl.tempSignature = $ctrl.signature; $ctrl.show = true">Signature</button>
 
-<img ng-show="$ctrl.signature"
+<img class="cypress-popup-img"
+     ng-if="$ctrl.signature"
      ng-src="{{ $ctrl.signature }}"></image>

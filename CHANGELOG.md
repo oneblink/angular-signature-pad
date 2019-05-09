@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Fixed
+
+-   Fixed changes to `options` attribute not being reflected in signature_pad
+
 ## 1.0.1 - 2018-06-14
 
 ### Fixed

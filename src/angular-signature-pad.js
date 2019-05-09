@@ -44,19 +44,22 @@ function BmSignaturePadController ($scope, $element, $attrs, $window, $log) {
     }
 
     // Need to wrap the onBegin and onEnd in an $apply to ensure a digest cycle is started
-    const wrapFunction = (fn) => {
-      if (angular.isFunction(fn)) {
-        return () => $scope.$apply(() => fn())
+    const onBegin = opts.onBegin
+    if (angular.isFunction(onBegin)) {
+      opts.onBegin = (event) => {
+        onBegin(event)
+        $scope.$applyAsync()
       }
     }
-    opts.onBegin = wrapFunction(opts.onBegin)
+
     const onEnd = opts.onEnd
-    opts.onEnd = wrapFunction(() => {
+    opts.onEnd = (event) => {
       vm.ngModel.$setViewValue(getSignature())
       if (angular.isFunction(onEnd)) {
-        onEnd()
+        onEnd(event)
       }
-    })
+      $scope.$applyAsync()
+    }
 
     signaturePad = new SignaturePad(canvas, opts)
 
@@ -102,6 +105,26 @@ function BmSignaturePadController ($scope, $element, $attrs, $window, $log) {
     // Observe changes to disabled attribute if using ngDisabled
     if ($attrs.ngDisabled) {
       $attrs.$observe('disabled', (disabled) => disabled ? signaturePad.off() : signaturePad.on())
+    }
+
+    if ($attrs.options) {
+      const keys = [
+        'dotSize',
+        'minWidth',
+        'maxWidth',
+        'throttle',
+        'minDistance',
+        'backgroundColor',
+        'penColor',
+        'velocityFilterWeight',
+      ]
+      $scope.$watch(() => vm.options, (newValue) => {
+        Object.keys(newValue).forEach((key) => {
+          if (keys.some(k => k === key)) {
+            signaturePad[key] = newValue[key]
+          }
+        })
+      }, true)
     }
   }
 }

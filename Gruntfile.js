@@ -6,14 +6,14 @@ module.exports = function (grunt) {
 
     babel: {
       options: {
-        plugins: [['transform-es2015-modules-umd', {
+        plugins: [['@babel/plugin-transform-modules-umd', {
           exactGlobals: true,
           globals: {
             'signature_pad': 'SignaturePad',
             '@blinkmobile/canvas-manipulation': 'canvasManipulation'
           }
         }]],
-        presets: ['es2015']
+        presets: ['@babel/preset-env']
       },
       prod: {
         files: {
