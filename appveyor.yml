@@ -15,6 +15,10 @@ install:
   - npm --version
   - npm ci
 
+# Post-install test scripts.
+test_script:
+  - npm test
+
 cache:
   # cache NPM packages and Cypress binary
   - '%AppData%\npm'
