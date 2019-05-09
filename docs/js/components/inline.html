@@ -1,6 +1,7 @@
 <h3>Inline</h3>
 <form name="inline">
-  <bm-signature-pad ng-model="$ctrl.signature"
+  <bm-signature-pad class="cypress-inline-signature-pad"
+                    ng-model="$ctrl.signature"
                     ng-disabled="$ctrl.disabled"
                     required
                     options="$ctrl.options"
@@ -10,11 +11,12 @@
                     resize="$ctrl.resize = $fn"
                     ng-style="{ 'height': $ctrl.height + 'px' }"></bm-signature-pad>
 
-  <button ng-click="$ctrl.signature = undefined; $ctrl.totalStrokes = 0;"
+  <button class="cypress-clear-inline-signature-pad"
+          ng-click="$ctrl.signature = undefined; $ctrl.totalStrokes = 0;"
           ng-disabled="inline.$invalid || $ctrl.disabled">Clear</button>
   <button ng-click="$ctrl.disabled = !$ctrl.disabled">{{$ctrl.disabled ? 'Enable' : 'Disable'}}</button>
 </form>
-<div>Total Strokes: {{$ctrl.totalStrokes}}</div>
+<div>Total Strokes: <span class="cypress-total-strokes">{{$ctrl.totalStrokes}}</span></div>
 <br>
 
 <label>Height: </label>
@@ -67,5 +69,6 @@
          value="image/svg+xml"
          ng-change="$ctrl.crop = $ctrl.imageType !== 'image/svg+xml'"></label>
 
-<img ng-show="$ctrl.signature"
+<img class="cypress-inline-img"
+     ng-show="$ctrl.signature"
      ng-src="{{ $ctrl.signature }}"></image>

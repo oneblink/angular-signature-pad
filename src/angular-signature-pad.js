@@ -46,17 +46,17 @@ function BmSignaturePadController ($scope, $element, $attrs, $window, $log) {
     // Need to wrap the onBegin and onEnd in an $apply to ensure a digest cycle is started
     const onBegin = opts.onBegin
     if (angular.isFunction(onBegin)) {
-      opts.onBegin = () => {
-        onBegin()
+      opts.onBegin = (event) => {
+        onBegin(event)
         $scope.$applyAsync()
       }
     }
 
     const onEnd = opts.onEnd
-    opts.onEnd = () => {
+    opts.onEnd = (event) => {
       vm.ngModel.$setViewValue(getSignature())
       if (angular.isFunction(onEnd)) {
-        onEnd()
+        onEnd(event)
       }
       $scope.$applyAsync()
     }

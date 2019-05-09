@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "../.eslintrc.json"
+  ],
+  "env": {
+    "mocha": true,
+    "browser": true
+  },
+  "globals": {
+    "cy": true,
+    "Cypress": true,
+    "expect": true
+  },
+  "rules": {
+    "no-unused-expressions": "off",
+    "no-console": "off"
+  }
+}

@@ -80,21 +80,22 @@
       var onBegin = opts.onBegin;
 
       if (_angular["default"].isFunction(onBegin)) {
-        opts.onBegin = function () {
-          onBegin();
+        opts.onBegin = function (event) {
+          onBegin(event);
           $scope.$applyAsync();
         };
       }
 
       var onEnd = opts.onEnd;
 
-      opts.onEnd = function () {
+      opts.onEnd = function (event) {
         vm.ngModel.$setViewValue(getSignature());
 
         if (_angular["default"].isFunction(onEnd)) {
-          onEnd();
-        } // $scope.$applyAsync()
+          onEnd(event);
+        }
 
+        $scope.$applyAsync();
       };
 
       signaturePad = new _signature_pad["default"](canvas, opts); // Functions that are made available to the parent component

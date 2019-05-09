@@ -14,6 +14,7 @@
     "@blinkmobile/canvas-manipulation": "^1.0.1",
     "angular": "^1.7.8",
     "angular-mocks": "^1.7.8",
+    "cypress": "^3.2.0",
     "eslint": "^5.16.0",
     "eslint-config-angular": "^0.5.0",
     "eslint-config-standard": "^12.0.0",
@@ -27,21 +28,11 @@
     "grunt-babel": "^8.0.0",
     "grunt-contrib-uglify": "^4.0.1",
     "http-server": "^0.11.1",
-    "jasmine-core": "^3.4.0",
-    "karma": "^4.1.0",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-detect-browsers": "^2.3.3",
-    "karma-edge-launcher": "^0.4.2",
-    "karma-firefox-launcher": "^1.1.0",
-    "karma-ie-launcher": "^1.0.0",
-    "karma-jasmine": "^2.0.1",
-    "karma-opera-launcher": "^1.0.0",
-    "karma-phantomjs-launcher": "^1.0.4",
-    "karma-safari-launcher": "^1.0.0",
     "remark-cli": "^6.0.1",
     "remark-lint": "^6.0.4",
     "remark-preset-lint-recommended": "^3.0.2",
-    "signature_pad": "^3.0.0-beta.3"
+    "signature_pad": "^3.0.0-beta.3",
+    "start-server-and-test": "^1.9.0"
   },
   "directories": {
     "docs": "docs",
@@ -78,12 +69,14 @@
   },
   "scripts": {
     "build": "grunt",
+    "cy:run": "cypress run",
+    "cypress": "cypress open",
     "eslint": "eslint --fix --cache .",
     "fixpack": "fixpack",
     "posttest": "npm run eslint && npm run remark",
     "pretest": "npm run build && npm run fixpack",
     "remark": "remark . --use remark-preset-lint-recommended",
-    "start": "http-server -o",
-    "test": "karma start"
+    "start": "http-server",
+    "test": "start-server-and-test start http://localhost:8080 cy:run"
   }
 }
